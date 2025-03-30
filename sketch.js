@@ -18,7 +18,7 @@ function preload() {
     wetGain = audioContext.createGain();
 
     oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+    oscillator.frequency.setValueAtTime(0, audioContext.currentTime);
 
     oscillator.connect(gainNode);
     gainNode.connect(dryGain);
@@ -144,14 +144,14 @@ function draw() {
 
 
       // Use the y-position of the wrist to determine the tone
-      let frequency = map(y, height * 0.8, height * 0.05, 40, 5000, true);//TODO: logaritmic scale
+      let frequency = map(y, height * 0.9, height * 0.1, 40, 5000, true);//TODO: logaritmic scale
       console.log("Frequency:", frequency);
       if (oscillator) {
         oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
       }
 
       // Use the x-position of the wrist to determine the volume
-      let volume = map(x, width * 0.9, width * 0.1, 0.0, 10.0, true);
+      let volume = map(x, width * 0.9, width * 0.1, 0.0, 1.0, true);
       console.log("Volume:", volume);
       if (oscillator) {
         gainNode.gain.setValueAtTime(volume, audioContext.currentTime);
